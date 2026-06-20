@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Room Capacity Calculator</title>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background:#f4f4f4;
+    margin:0;
+    padding:40px;
+}
+
+.container{
+    max-width:500px;
+    margin:auto;
+    background:white;
+    padding:25px;
+    border-radius:10px;
+    box-shadow:0 2px 10px rgba(0,0,0,.1);
+}
+
+h2{
+    text-align:center;
+    margin-bottom:20px;
+}
+
+.form-group{
+    margin-bottom:15px;
+}
+
+label{
+    display:block;
+    font-weight:bold;
+    margin-bottom:5px;
+}
+
+input{
+    width:100%;
+    padding:10px;
+    border:1px solid #ccc;
+    border-radius:5px;
+    box-sizing:border-box;
+}
+
+button{
+    width:100%;
+    padding:12px;
+    background:#0066cc;
+    color:white;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+    font-size:16px;
+}
+
+button:hover{
+    background:#0052a3;
+}
+
+.result{
+    margin-top:20px;
+    padding:15px;
+    text-align:center;
+    font-size:24px;
+    font-weight:bold;
+    background:#eaf4ff;
+    border-radius:5px;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Room Capacity Calculator</h2>
+    <h2>State max for 900 Sqft is 25</h2>
+    <h2>=ROUND(E2*(25/900),0)</h2>
+    <div class="form-group">
+        <label>Square Feet</label>
+        <input type="number" id="sqft" value="900">
+    </div>
+
+    <div class="form-group">
+        <label>Capacity Factor</label>
+        <input type="number" id="factor" value="29">
+    </div>
+
+    <div class="form-group">
+        <label>Base Square Feet</label>
+        <input type="number" id="base" value="900">
+    </div>
+
+    <button onclick="calculate()">Calculate Capacity</button>
+
+    <div class="result" id="result">
+        Capacity: 29
+    </div>
+</div>
+
+<script>
+function calculate() {
+
+    const sqft = Number(document.getElementById('sqft').value);
+    const factor = Number(document.getElementById('factor').value);
+    const base = Number(document.getElementById('base').value);
+
+    const capacity = Math.round(sqft * (factor / base));
+
+    document.getElementById('result').innerHTML =
+        `Capacity: ${capacity}`;
+}
+
+// Auto-calculate when values change
+document.querySelectorAll('input').forEach(input => {
+    input.addEventListener('input', calculate);
+});
+
+calculate();
+</script>
+
+</body>
+</html>
